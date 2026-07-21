@@ -1,10 +1,12 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { projects } from "@/lib/data";
 import type { Project } from "@/lib/types";
 
 /* ── Metric icons ── */
 function MetricIcon({ type }: { type: Project["metrics"][number]["icon"] }) {
-  const cls = "w-5 h-5 text-blue shrink-0";
+  const cls = "w-4 h-4 shrink-0";
   if (type === "chart")
     return (
       <svg className={cls} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -57,7 +59,6 @@ function MetricIcon({ type }: { type: Project["metrics"][number]["icon"] }) {
         <circle cx="10" cy="18" r="1.2" fill="currentColor" />
       </svg>
     );
-  // trend-down
   return (
     <svg className={cls} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="2,6 7,11 11,8 18,15" />
@@ -66,342 +67,361 @@ function MetricIcon({ type }: { type: Project["metrics"][number]["icon"] }) {
   );
 }
 
-/* ── Project preview mockups ── */
-function VoxPreview() {
+/* ── Live site screenshot preview ── */
+function SitePreview({ url }: { url: string }) {
+  const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
+  const fullUrl = url.startsWith("http") ? url : `https://${url}`;
+  // Microlink screenshot API — free tier, no key required
+  const src = `https://api.microlink.io/?url=${encodeURIComponent(fullUrl)}&screenshot=true&meta=false&embed=screenshot.url`;
+
   return (
-    <div className="w-full h-full bg-white flex flex-col text-[0px] overflow-hidden">
-      {/* browser bar */}
-      <div className="bg-[#f5f5f5] border-b border-gray-200 px-3 py-2 flex items-center gap-2 shrink-0">
-        <div className="flex gap-1">
+    <div className="relative w-full h-full bg-[#07070f] overflow-hidden">
+
+      {/* Loading skeleton */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-300 ${status !== "loading" ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+      >
+        <div className="h-7 bg-white/[0.03] border-b border-white/5" />
+        <div className="p-5 flex flex-col gap-3">
+          {[70, 55, 80, 45, 65].map((w, i) => (
+            <div
+              key={i}
+              className="h-1.5 bg-white/[0.04] rounded-full animate-pulse"
+              style={{ width: `${w}%`, animationDelay: `${i * 100}ms` }}
+            />
+          ))}
+          <div className="mt-3 grid grid-cols-3 gap-2">
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className="h-16 bg-white/[0.03] rounded-lg animate-pulse"
+                style={{ animationDelay: `${i * 120}ms` }}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Screenshot image */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={`${url} preview`}
+        className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${status === "loaded" ? "opacity-100" : "opacity-0"}`}
+        onLoad={() => setStatus("loaded")}
+        onError={() => setStatus("error")}
+      />
+
+      {/* Error / unavailable */}
+      {status === "error" && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+          <div className="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/8 flex items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" className="text-white/25">
+              <circle cx="9" cy="9" r="7" />
+              <path d="M9 6v3.5M9 12.5v.5" />
+            </svg>
+          </div>
+          <div className="text-center">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-white/25">{url}</p>
+            <p className="font-mono text-[7px] text-white/15 mt-1">Screenshot unavailable</p>
+            <p className="font-mono text-[7px] text-white/10 mt-0.5">Update links.live with a real URL</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── Browser frame wrapper ── */
+function BrowserFrame({ url, children }: { url: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl overflow-hidden border border-white/8 shadow-2xl h-full flex flex-col">
+      <div className="bg-[#111118] px-3 py-2 flex items-center gap-2 shrink-0">
+        <div className="flex gap-1.5">
           <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
           <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
           <span className="w-2 h-2 rounded-full bg-[#28c840]" />
         </div>
-        <div className="flex-1 bg-white rounded border border-gray-200 px-2 py-0.5 text-[8px] text-gray-400 font-mono">vox.store</div>
-        <div className="flex gap-2 text-gray-400">
-          {["⌕","✦","☆","👤"].map(i => <span key={i} className="text-[8px]">{i}</span>)}
+        <div className="flex-1 bg-white/5 rounded-md px-2 py-0.5 text-[8px] text-white/35 font-mono truncate">
+          {url}
+        </div>
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-sm bg-white/8" />
+          <div className="w-3 h-3 rounded-sm bg-white/8" />
         </div>
       </div>
-      {/* nav */}
-      <div className="bg-white border-b border-gray-100 px-4 py-1.5 flex items-center justify-between shrink-0">
-        <span className="text-[9px] font-bold text-gray-900 tracking-wider">VOX</span>
-        <div className="flex gap-3 text-[7px] text-gray-500">
-          {["Shop","Categories","Deals","About"].map(l => <span key={l}>{l}</span>)}
-        </div>
-      </div>
-      {/* hero */}
-      <div className="flex flex-1 overflow-hidden">
-        <div className="flex-1 p-3 flex flex-col justify-center gap-2">
-          <p className="text-[11px] font-bold text-gray-900 leading-tight">Shop smarter<br/>with your voice</p>
-          <p className="text-[7px] text-gray-400">Ask, discover and buy — all in one conversation.</p>
-          <div className="flex items-center gap-1 border border-gray-200 rounded-full px-2 py-1 bg-white max-w-30">
-            <span className="text-[7px] text-gray-400 flex-1 truncate">Try &quot;wireless headphones...&quot;</span>
-            <span className="w-3 h-3 rounded-full bg-blue flex items-center justify-center text-white text-[5px]">🎤</span>
-          </div>
-          {/* recommendations */}
-          <p className="text-[7px] font-semibold text-gray-700 mt-1">Recommended for you</p>
-          <div className="flex gap-1.5">
-            {[
-              { name: "Smart Watch XR", price: "$199" },
-              { name: "Noise Cancelling", price: "$149" },
-              { name: "Tech Backpack", price: "$99" },
-            ].map((p) => (
-              <div key={p.name} className="flex-1 bg-gray-50 rounded p-1 border border-gray-100">
-                <div className="w-full aspect-square bg-gray-200 rounded mb-1" />
-                <p className="text-[6px] text-gray-700 font-medium leading-tight truncate">{p.name}</p>
-                <p className="text-[6px] text-gray-500">{p.price}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* product image area */}
-        <div className="w-22.5 bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-2">
-          <div className="w-16 h-16 rounded-lg bg-gray-800 flex items-center justify-center text-[22px]">🎧</div>
-        </div>
-      </div>
+      <div className="flex-1 min-h-0 overflow-hidden">{children}</div>
     </div>
   );
 }
 
-function SentinelPreview() {
-  const stats = [
-    { l: "Total Bins", v: "1,248", d: "+12%", c: "text-green-500" },
-    { l: "Active",     v: "1,023", d: "+8%",  c: "text-green-500" },
-    { l: "Fill Avg.",  v: "68%",   d: "+5%",  c: "text-green-500" },
-    { l: "Alerts",    v: "23",    d: "-10%", c: "text-red-400"   },
-  ];
-  return (
-    <div className="w-full h-full bg-[#0f172a] flex overflow-hidden text-[0px]">
-      {/* sidebar */}
-      <div className="w-17.5 border-r border-white/10 flex flex-col shrink-0">
-        <div className="p-2 border-b border-white/10 flex items-center gap-1">
-          <div className="w-4 h-4 rounded bg-blue flex items-center justify-center text-white text-[6px] font-bold shrink-0">SG</div>
-          <span className="text-[7px] text-white font-semibold">SENTINEL</span>
-        </div>
-        {["Overview","Sensors","Alerts","Analytics","Reports","Settings"].map((item, i) => (
-          <div key={item} className={`px-2 py-1.5 flex items-center gap-1.5 ${i === 0 ? "bg-blue/20 border-l-2 border-blue" : ""}`}>
-            <div className="w-1.5 h-1.5 rounded-sm bg-white/40" />
-            <span className="text-[6px] text-white/70">{item}</span>
-          </div>
-        ))}
-      </div>
-      {/* main */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="px-3 py-2 border-b border-white/10 flex items-center justify-between shrink-0">
-          <span className="text-[8px] text-white font-semibold">Overview</span>
-          <span className="text-[6px] text-white/40 border border-white/20 px-1.5 py-0.5 rounded">Last 24 Hours ▾</span>
-        </div>
-        {/* stat cards */}
-        <div className="grid grid-cols-4 gap-1.5 px-3 py-2 shrink-0">
-          {stats.map((s) => (
-            <div key={s.l} className="bg-white/5 rounded p-1.5">
-              <p className="text-[5px] text-white/40 uppercase tracking-wide">{s.l}</p>
-              <p className="text-[9px] font-bold text-white leading-tight">{s.v}</p>
-              <p className={`text-[5px] font-mono ${s.c}`}>{s.d}</p>
-            </div>
-          ))}
-        </div>
-        {/* panels */}
-        <div className="flex gap-2 px-3 pb-2 flex-1 min-h-0">
-          <div className="flex-1 bg-white/5 rounded p-2 flex flex-col">
-            <p className="text-[6px] text-white/50 mb-1">Live Map</p>
-            <div className="flex-1 bg-[#0a1628] rounded relative overflow-hidden">
-              {/* fake map dots */}
-              {[[20,30],[40,45],[55,20],[35,60],[65,50],[25,70]].map(([x,y],i) => (
-                <div key={i} className="absolute w-1.5 h-1.5 rounded-full bg-green-400" style={{left:`${x}%`,top:`${y}%`,opacity:0.7+i*0.05}} />
-              ))}
-              {/* tooltip */}
-              <div className="absolute bg-[#0f172a] border border-white/20 rounded p-1" style={{left:"30%",top:"50%"}}>
-                <p className="text-[5px] text-white/80">Bin A-32</p>
-                <p className="text-[5px] text-white/50">Fill 88%</p>
-              </div>
-            </div>
-          </div>
-          <div className="w-20 bg-white/5 rounded p-2 flex flex-col gap-1">
-            <p className="text-[6px] text-white/50">Fill Distribution</p>
-            {/* fake donut */}
-            <div className="flex justify-center my-1">
-              <div className="w-10 h-10 rounded-full border-4 border-blue relative flex items-center justify-center">
-                <span className="text-[6px] text-white font-bold">68%</span>
-              </div>
-            </div>
-            {[["0-25%","bg-blue/30"],["25-50%","bg-blue/50"],["50-75%","bg-blue/80"],["75-100%","bg-blue"]].map(([l,c]) => (
-              <div key={l} className="flex items-center gap-1">
-                <span className={`w-1.5 h-1.5 rounded-sm ${c}`} />
-                <span className="text-[5px] text-white/50">{l}</span>
-              </div>
-            ))}
-            <p className="text-[6px] text-white/50 mt-1 border-t border-white/10 pt-1">Latest Alerts</p>
-            {[["Bin B-104","Overflow","2m ago"],["Bin C-170","Sensor Offline","5m ago"]].map(([b,s,t]) => (
-              <div key={b} className="flex items-start gap-1">
-                <span className="w-1 h-1 rounded-full bg-red-400 mt-0.5 shrink-0" />
-                <div>
-                  <p className="text-[5px] text-white/70">{b}</p>
-                  <p className="text-[4px] text-white/40">{s} · {t}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+const URLS = ["https://www.iqliqlive.ae/", "https://brand.iqliq.ae/", "https://mall.iqliqlive.ae/", "https://admin.iqliqlive.ae/",];
 
-function HaloPreview() {
-  return (
-    <div className="w-full h-full bg-[#0f0f23] flex overflow-hidden text-[0px]">
-      <div className="w-16.25 border-r border-white/10 flex flex-col shrink-0">
-        <div className="p-2 border-b border-white/10">
-          <span className="text-[8px] font-bold text-white tracking-wider">HALO</span>
-        </div>
-        {["Dashboard","Campaigns","Affiliates","Payouts","Reports"].map((item, i) => (
-          <div key={item} className={`px-2 py-1.5 flex items-center gap-1.5 ${i === 0 ? "bg-purple-500/20 border-l-2 border-purple-400" : ""}`}>
-            <div className="w-1.5 h-1.5 rounded-sm bg-white/30" />
-            <span className="text-[6px] text-white/60">{item}</span>
-          </div>
-        ))}
-      </div>
-      <div className="flex-1 flex flex-col p-2 gap-2">
-        <div className="grid grid-cols-3 gap-1.5 shrink-0">
-          {[{l:"Total Revenue",v:"$48.2K",d:"+18%"},{l:"Active Affiliates",v:"342",d:"+7%"},{l:"Conversions",v:"1,284",d:"+23%"}].map(s => (
-            <div key={s.l} className="bg-white/5 rounded p-1.5">
-              <p className="text-[5px] text-white/40">{s.l}</p>
-              <p className="text-[9px] font-bold text-white">{s.v}</p>
-              <p className="text-[5px] text-green-400">{s.d}</p>
-            </div>
-          ))}
-        </div>
-        <div className="flex gap-1.5 flex-1 min-h-0">
-          <div className="flex-1 bg-white/5 rounded p-2">
-            <p className="text-[6px] text-white/50 mb-1">Campaign Performance</p>
-            <div className="flex items-end gap-1 h-10">
-              {[40,65,50,80,60,90,75].map((h,i) => (
-                <div key={i} className="flex-1 bg-purple-500/60 rounded-sm" style={{height:`${h}%`}} />
-              ))}
-            </div>
-          </div>
-          <div className="w-18.75 bg-white/5 rounded p-2">
-            <p className="text-[6px] text-white/50 mb-1">Top Affiliates</p>
-            {[["@nova","$8.2K"],["@kira","$6.1K"],["@zeus","$4.8K"]].map(([n,v]) => (
-              <div key={n} className="flex items-center justify-between py-1 border-b border-white/5 last:border-0">
-                <span className="text-[5.5px] text-white/70">{n}</span>
-                <span className="text-[5.5px] text-purple-300">{v}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="bg-white/5 rounded p-2 shrink-0">
-          <p className="text-[6px] text-white/50 mb-1">Recent Transactions</p>
-          <div className="flex gap-1.5">
-            {[{id:"TXN-9281",a:"@nova",v:"$420",s:"Paid"},{id:"TXN-9280",a:"@kira",v:"$215",s:"Pending"},{id:"TXN-9279",a:"@zeus",v:"$312",s:"Paid"}].map(t => (
-              <div key={t.id} className="flex-1 flex items-center gap-1">
-                <div className="w-1 h-1 rounded-full bg-purple-400" />
-                <div>
-                  <p className="text-[5px] text-white/60">{t.id}</p>
-                  <p className="text-[5px] text-white/40">{t.a} · {t.v}</p>
-                </div>
-                <span className={`ml-auto text-[4px] px-1 py-0.5 rounded ${t.s === "Paid" ? "bg-green-500/20 text-green-400" : "bg-yellow-500/20 text-yellow-400"}`}>{t.s}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+/* ── Card styles ── */
+const CARD_BG: CSSProperties = {
+  background: "#07070f",
+  backgroundImage:
+    "linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)",
+  backgroundSize: "48px 48px",
+  border: "1px solid rgba(255,255,255,0.06)",
+  boxShadow:
+    "0 0 0 1px rgba(59,130,246,0.04), 0 0 120px -20px rgba(59,130,246,0.16), 0 48px 120px -20px rgba(0,0,0,0.9)",
+};
 
-const previews = [VoxPreview, SentinelPreview, HaloPreview];
+const SECTION_STYLE: CSSProperties = {
+  backgroundColor: "#fafafa",
+  backgroundImage:
+    "linear-gradient(rgba(37,99,235,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.045) 1px, transparent 1px)",
+  backgroundSize: "40px 40px",
+};
+
+const METRICS_STRIP_STYLE: CSSProperties = {
+  background: "rgba(255,255,255,0.03)",
+  backdropFilter: "blur(12px)",
+  WebkitBackdropFilter: "blur(12px)",
+  borderTop: "1px solid rgba(255,255,255,0.06)",
+};
 
 export default function Work() {
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    const HEADER = 64;
+
+    // Promote each card to its own compositor layer for jank-free scroll animation
+    cardRefs.current.forEach((c) => {
+      if (c) c.style.willChange = "transform, filter, opacity";
+    });
+
+    const onScroll = () => {
+      const VH = window.innerHeight;
+
+      cardRefs.current.forEach((card, i) => {
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const next = cardRefs.current[i + 1];
+
+        // ── Enter: card rising from below (0 = at viewport bottom, 1 = stuck at top) ──
+        const enterT =
+          i === 0
+            ? 1
+            : Math.max(0, Math.min(1, (VH - rect.top) / (VH - HEADER)));
+
+        // ── Exit: next card climbing to cover this one (0 = far below, 1 = fully on top) ──
+        let exitT = 0;
+        if (next) {
+          const nTop = next.getBoundingClientRect().top;
+          exitT = Math.max(0, Math.min(1, (VH - nTop) / (VH - HEADER)));
+        }
+
+        card.style.transformOrigin = "top center";
+
+        if (enterT < 1) {
+          // ── Entering: card expands as it rises ──
+          const scale = 0.93 + enterT * 0.07;
+          card.style.transform = `scale(${scale})`;
+          card.style.filter = "";
+          card.style.opacity = "";
+        } else if (exitT > 0) {
+          // ── Exiting: card floats up, shrinks, blurs, fades ──
+          const scale   = 1 - exitT * 0.05;
+          const ty      = -exitT * 40;
+          const blur    = exitT * 7;
+          const opacity = 1 - exitT * 0.4;
+          card.style.transform = `scale(${scale}) translateY(${ty}px)`;
+          card.style.filter    = `blur(${blur}px)`;
+          card.style.opacity   = String(opacity);
+        } else {
+          // ── Active: fully in view ──
+          card.style.transform = "";
+          card.style.filter    = "";
+          card.style.opacity   = "";
+        }
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // apply on mount so initial deck peek is scaled correctly
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <section id="work" className="relative py-24 lg:py-36">
+    <section id="work" className="relative py-24 lg:py-36" style={SECTION_STYLE}>
       <div className="mx-auto max-w-375 px-5 sm:px-6 lg:px-10">
 
-        {/* ── Section header (unchanged) ── */}
-        <div className="grid grid-cols-12 gap-6 mb-16 items-end reveal">
-          <div className="col-span-12 lg:col-span-4 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-            [02] / SELECTED WORK
-            <br />
-            <span className="text-blue">03 CASES · 2024—2025</span>
+        {/* ── Header ── */}
+        <div className="mb-14 lg:mb-20 reveal">
+          <div className="flex items-center gap-2 mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+              [02] SELECTED WORK
+            </span>
           </div>
-          <h2 className="col-span-12 lg:col-span-8 font-display text-5xl sm:text-6xl lg:text-9xl">
+          <h2 className="font-display text-5xl sm:text-7xl lg:text-[9rem] leading-[0.88] tracking-tight text-gray-900">
             THINGS <span className="text-blue">I&apos;VE</span>
             <br />
-            <span className="stroke-text">SHIPPED.</span>
+            <span className="stroke-text">BUILT</span>
           </h2>
+          <p className="mt-6 text-sm text-muted-foreground max-w-sm leading-relaxed">
+            A collection of AI products, dashboards, SaaS platforms, and scalable applications.
+          </p>
         </div>
 
-        {/* ── Project cards ── */}
-        <div className="space-y-6">
+        {/* ── Sticky stacking cards ── */}
+        <div>
           {projects.map((p, idx) => {
-            const Preview = previews[idx];
+            const url = URLS[idx] ?? "project.app";
+
             return (
               <article
                 key={p.no}
-                className="grid grid-cols-1 lg:grid-cols-[minmax(0,2.2fr)_minmax(0,3fr)_minmax(0,1.6fr)] border border-border reveal"
-                style={{ "--delay": `${idx * 0.15}s` } as CSSProperties}
+                ref={(el) => { cardRefs.current[idx] = el; }}
+                className={`sticky top-16 rounded-4xl overflow-hidden ${idx > 0 ? "mt-12" : ""}`}
+                style={{ ...CARD_BG, zIndex: idx + 10 } as CSSProperties}
               >
+                {/* Top accent line */}
+                <div className="h-px w-full bg-linear-to-r from-transparent via-blue/40 to-transparent" />
 
-                {/* ── Left: project info ── */}
-                <div className="bg-foreground text-background p-6 lg:p-8 flex flex-col gap-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="font-mono text-[11px] text-blue tracking-widest">{p.no}</span>
-                    {p.featured && (
-                      <span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-widest text-background/60 border border-background/20 px-2 py-0.5">
-                        <svg width="9" height="9" viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3.1L11 4.6l-2.5 2.4.6 3.4L6 8.8l-3.1 1.6.6-3.4L1 4.6l3.5-.5z"/></svg>
-                        Featured
-                      </span>
-                    )}
-                  </div>
+                {/* Main content: left info + right mockup */}
+                <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
 
-                  <div>
-                    <h3 className="font-display text-3xl sm:text-4xl leading-tight uppercase tracking-tight text-background">
-                      {p.title.toUpperCase()}
-                    </h3>
-                    <p className="text-blue text-sm font-medium mt-1">{p.subtitle}</p>
-                  </div>
+                  {/* ── Left: project info ── */}
+                  <div className="p-7 lg:p-10 flex flex-col gap-6 border-b lg:border-b-0 lg:border-r border-white/5">
 
-                  <p className="text-sm leading-relaxed text-background/70 flex-1">{p.blurb}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[10px] tracking-[0.3em] text-blue/80">{p.no}</span>
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-white/20">{p.year}</span>
+                    </div>
 
-                  <div className="flex flex-wrap gap-1.5">
-                    {p.stack.map((s) => (
-                      <span
-                        key={s}
-                        className="text-[10px] font-mono uppercase tracking-widest px-2 py-1 bg-background/10 border border-background/15 text-background/70"
+                    <div>
+                      <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/30 mb-2">{p.kicker}</p>
+                      <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl leading-[0.9] tracking-tight text-white">
+                        {p.title.toUpperCase()}
+                      </h3>
+                      <p className="text-blue text-xs font-medium mt-2 tracking-wide">{p.subtitle}</p>
+                    </div>
+
+                    <p className="text-[13px] leading-relaxed text-white/45 flex-1 max-w-xs">{p.blurb}</p>
+
+                    {/* Stack pills */}
+                    <div className="flex flex-wrap gap-1.5">
+                      {p.stack.map((s) => (
+                        <span
+                          key={s}
+                          className="text-[9px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/5 border border-white/8 text-white/40 hover:text-blue hover:border-blue/25 transition-colors"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* CTA buttons */}
+                    <div className="flex flex-wrap gap-2.5 pt-1">
+                      <a
+                        href={p.links?.caseStudy ?? "#"}
+                        className="inline-flex items-center gap-2 rounded-full bg-blue text-white px-4 py-2 text-[10px] uppercase tracking-widest font-medium hover:opacity-90 transition-opacity"
                       >
-                        {s}
-                      </span>
-                    ))}
+                        Case Study
+                        <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                          <path d="M2 10L10 2M10 2H4M10 2v6"/>
+                        </svg>
+                      </a>
+                      <a
+                        href={p.links?.live ?? "#"}
+                        className="inline-flex items-center gap-2 rounded-full bg-white/6 border border-white/10 text-white/60 px-4 py-2 text-[10px] uppercase tracking-widest font-medium hover:bg-white/10 hover:text-white transition-all"
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10" />
+                          <line x1="2" y1="12" x2="22" y2="12" />
+                          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                        Live Demo
+                      </a>
+                      <a
+                        href="#"
+                        className="inline-flex items-center gap-2 rounded-full bg-white/4 border border-white/8 text-white/40 px-4 py-2 text-[10px] uppercase tracking-widest font-medium hover:bg-white/8 hover:text-white/70 transition-all"
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                        </svg>
+                        GitHub
+                      </a>
+                    </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-3 pt-2">
-                    <a
-                      href={p.links?.caseStudy ?? "#"}
-                      className="inline-flex items-center gap-1.5 bg-blue text-white px-4 py-2.5 text-[10px] uppercase tracking-widest font-medium hover:opacity-90 transition-opacity"
-                    >
-                      VIEW CASE STUDY <span>↗</span>
-                    </a>
-                    <a
-                      href={p.links?.live ?? "#"}
-                      className="inline-flex items-center gap-1.5 border border-background/30 text-background/70 px-4 py-2.5 text-[10px] uppercase tracking-widest font-medium hover:border-blue hover:text-blue transition-colors"
-                    >
-                      VIEW LIVE <span className="text-[9px]">↗</span>
-                    </a>
+                  {/* ── Right: browser mockup ── */}
+                  <div
+                    className="relative min-h-64 sm:min-h-80 lg:min-h-0"
+                    style={{ height: 380 }}
+                  >
+                    <div className="absolute inset-4 lg:inset-6">
+                      <BrowserFrame url={url}>
+                        <SitePreview url={url} />
+                      </BrowserFrame>
+                    </div>
+                    {/* Subtle inner glow on right */}
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ background: "radial-gradient(ellipse at 80% 50%, rgba(59,130,246,0.06) 0%, transparent 60%)" }}
+                    />
                   </div>
                 </div>
 
-                {/* ── Center: preview ── */}
-                <div className="relative min-h-70 sm:min-h-80 lg:min-h-0 border-t lg:border-t-0 lg:border-x border-border overflow-hidden">
-                  {Preview && <Preview />}
-                </div>
-
-                {/* ── Right: metrics ── */}
-                <div className="bg-background border-t lg:border-t-0 border-border grid grid-cols-2 lg:grid-cols-1 lg:divide-y lg:divide-border">
+                {/* ── Metrics strip ── */}
+                <div
+                  className="grid grid-cols-2 sm:grid-cols-4"
+                  style={METRICS_STRIP_STYLE}
+                >
                   {p.metrics.map((m, mi) => (
                     <div
                       key={m.l}
-                      className={[
-                        "flex items-center gap-3 px-4 sm:px-5 py-4 lg:py-0 lg:h-[25%] border-border",
-                        mi % 2 === 0 ? "border-r lg:border-r-0" : "",
-                        mi < 2      ? "border-b lg:border-b-0" : "",
-                      ].join(" ")}
+                      className={`px-6 py-4 flex items-center gap-3 ${mi < p.metrics.length - 1 ? "border-r border-white/5" : ""}`}
                     >
-                      <MetricIcon type={m.icon} />
+                      <div className="text-blue/70">
+                        <MetricIcon type={m.icon} />
+                      </div>
                       <div>
-                        <div className="font-display text-2xl sm:text-3xl leading-none">{m.v}</div>
-                        <div className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground mt-1">
-                          {m.l}
-                        </div>
+                        <p className="font-display text-xl text-white leading-none">{m.v}</p>
+                        <p className="font-mono text-[9px] uppercase tracking-widest text-white/30 mt-0.5">{m.l}</p>
                       </div>
                     </div>
                   ))}
                 </div>
-
               </article>
             );
           })}
         </div>
 
+        <div className="h-10" />
+
         {/* ── CTA footer ── */}
-        <div className="mt-8 border border-border p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 reveal">
+        <div
+          className="mt-4 rounded-[28px] p-7 sm:p-9 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+          style={{
+            ...CARD_BG,
+            boxShadow: "0 0 60px -20px rgba(59,130,246,0.12)",
+          }}
+        >
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-blue flex items-center justify-center shrink-0">
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <div className="w-12 h-12 rounded-2xl bg-blue/10 border border-blue/20 flex items-center justify-center shrink-0">
+              <svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="#3B82F6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M11 2a9 9 0 0 1 0 18A9 9 0 0 1 11 2z" />
                 <path d="M7 9l4-4 4 4M11 5v8" />
               </svg>
             </div>
             <div>
-              <p className="font-display text-lg sm:text-xl">Have a project in mind?</p>
-              <p className="text-sm text-muted-foreground">Let&apos;s build something amazing together.</p>
+              <p className="font-display text-lg sm:text-xl text-white">Have a project in mind?</p>
+              <p className="text-sm text-white/40 mt-0.5">Let&apos;s build something amazing together.</p>
             </div>
           </div>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 bg-blue text-white px-6 py-3.5 text-xs uppercase tracking-widest font-medium hover:opacity-90 transition-opacity whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-2 bg-blue text-white rounded-full px-6 py-3 text-[10px] uppercase tracking-widest font-medium hover:opacity-90 transition-opacity whitespace-nowrap shrink-0"
           >
-            LET&apos;S TALK <span>↗</span>
+            LET&apos;S TALK
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M2 10L10 2M10 2H4M10 2v6"/>
+            </svg>
           </a>
         </div>
 

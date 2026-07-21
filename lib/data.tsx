@@ -54,6 +54,23 @@ export const projects: Project[] = [
     stack: ["TypeScript", "tRPC", "Prisma", "Redis"],
     links: { caseStudy: "#", live: "#" },
   },
+  {
+    no: "04",
+    year: "2023",
+    title: "Maple",
+    subtitle: "Team Productivity Analytics",
+    kicker: "Analytics · SaaS",
+    blurb:
+      "End-to-end engineering team performance platform with AI sprint forecasting and cycle-time analytics. Reduced planning overhead by 40% across 12 organizations.",
+    metrics: [
+      { v: "50+",  l: "Teams",      icon: "users"  },
+      { v: "40%",  l: "Time Saved", icon: "clock"  },
+      { v: "98%",  l: "Retention",  icon: "chart"  },
+      { v: "12ms", l: "P99 Query",  icon: "bolt"   },
+    ],
+    stack: ["React", "Golang", "ClickHouse", "Temporal", "Tailwind CSS"],
+    links: { caseStudy: "#", live: "#" },
+  },
 ];
 
 export interface Tech {
