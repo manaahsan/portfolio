@@ -14,7 +14,7 @@ export default function Hero() {
         alt=""
         fill
         priority
-        className="object-cover object-top-right pointer-events-none select-none"
+        className="hidden object-cover object-top-right pointer-events-none select-none md:block"
       />
 
       {/* Bottom fade to blend with page background */}
@@ -41,7 +41,7 @@ export default function Hero() {
       </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 mx-auto max-w-375 px-6 lg:px-16 pt-24 lg:pt-32">
+      <div className="relative z-10 mx-auto max-w-375 px-5 sm:px-8 lg:px-16 pt-20 sm:pt-24 lg:pt-32">
         <div
           className="grid grid-cols-12 gap-6 lg:gap-8 items-center"
           style={{ minHeight: "calc(100vh - 10rem)" }}
@@ -60,7 +60,7 @@ export default function Hero() {
             {/* Heading */}
             <h1
               className="font-display leading-[0.85] tracking-tight"
-              style={{ fontSize: "clamp(5rem, 12vw, 9.5rem)" }}
+              style={{ fontSize: "clamp(3.5rem, 12vw, 9.5rem)" }}
             >
               FULL<span className="text-blue">·</span>STACK
             </h1>
@@ -68,7 +68,7 @@ export default function Hero() {
             {/* Subheading */}
             <p
               className="font-display tracking-[0.18em] mt-3"
-              style={{ fontSize: "clamp(1rem, 2.2vw, 1.4rem)" }}
+              style={{ fontSize: "clamp(0.85rem, 2.2vw, 1.4rem)" }}
             >
               ENGINEERING{" "}
               <span className="text-blue">DIGITAL</span>{" "}
@@ -82,9 +82,30 @@ export default function Hero() {
               craft.
             </p>
 
+            {/* Mobile: Specializing In */}
+            <div className="lg:hidden mt-6 border border-border p-4 rise" style={{ "--delay": "0.25s" } as CSSProperties}>
+              <div className="font-mono text-[9px] uppercase tracking-widest text-blue mb-3 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue shrink-0" />
+                SPECIALIZING IN
+              </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+                {[
+                  "AI Integrated Systems",
+                  "Real-time IoT Platforms",
+                  "Scalable Web Apps",
+                  "E-commerce Solutions",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                    <span className="w-1 h-1 rounded-full bg-blue shrink-0" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* CTAs */}
             <div
-              className="flex items-center gap-4 mt-8 rise"
+              className="flex flex-wrap items-center gap-3 mt-8 rise"
               style={{ "--delay": "0.3s" } as CSSProperties}
             >
               <a
@@ -103,7 +124,7 @@ export default function Hero() {
 
             {/* Stats */}
             <div
-              className="grid grid-cols-4 gap-4 mt-10 pt-8 border-t border-border rise"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6 sm:gap-4 mt-10 pt-8 border-t border-border rise"
               style={{ "--delay": "0.45s" } as CSSProperties}
             >
               {[
@@ -132,7 +153,7 @@ export default function Hero() {
           {/* Right column: overlays on top of the background image */}
           <div
             className="hidden lg:flex col-span-6 relative items-end justify-end pb-12 rise"
-            style={{ "--delay": "0.2s", minHeight: "560px" } as CSSProperties}
+            style={{ "--delay": "0.2s", minHeight: "520px" } as CSSProperties}
           >
             {/* Specializing In card */}
             <div
@@ -205,7 +226,7 @@ export default function Hero() {
             {/* Rotating badge */}
             <div
               className="absolute floaty"
-              style={{ top: "8px", right: "8px" }}
+              style={{ top: "80px", left: "80px" }}
             >
               <div className="relative w-36 h-36">
                 <svg
