@@ -52,7 +52,7 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <div className="hidden sm:flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
               <span className="w-1.5 h-1.5 rounded-full bg-blue animate-pulse" />
-              KHI · {time}
+              UAE · {time}
             </div>
 
             {/* Hamburger — mobile only */}
