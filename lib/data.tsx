@@ -1,75 +1,240 @@
 import type { ReactNode } from "react";
 import type { Project, StackCat } from "./types";
 
+// export const projects: Project[] = [
+//   {
+//     no: "01",
+//     year: "2025",
+//     title: "Vox Commerce",
+//     subtitle: "AI-Powered Headless Storefront",
+//     kicker: "AI · Commerce",
+//     featured: true,
+//     blurb:
+//       "A scalable storefront with a voice assistant for conversational product discovery. Integrated AI recommendations that increased engagement and conversions significantly.",
+//     metrics: [
+//       { v: "+45%", l: "Engagement",        icon: "chart" },
+//       { v: "1.2s",  l: "TTI",              icon: "clock" },
+//       { v: "92%",   l: "User Satisfaction", icon: "users" },
+//       { v: "100%",  l: "Responsive",        icon: "code"  },
+//     ],
+//     stack: ["Next.js", "OpenAI", "Stripe", "PostgreSQL", "Tailwind CSS"],
+//     links: { caseStudy: "#", live: "#" },
+//   },
+//   {
+//     no: "02",
+//     year: "2024",
+//     title: "Sentinel Grid",
+//     subtitle: "Real-time IoT Monitoring Dashboard",
+//     kicker: "IoT · Real-time",
+//     blurb:
+//       "Real-time SSR dashboard for smart waste sensors across the city. Tuned rendering for high-frequency feeds — sub-200ms updates at the edge.",
+//     metrics: [
+//       { v: "<200ms", l: "Latency",       icon: "bolt"       },
+//       { v: "10K+",   l: "Sessions",      icon: "db"         },
+//       { v: "99.9%",  l: "Uptime",        icon: "signal"     },
+//       { v: "-30%",   l: "Cost Optimized", icon: "trend-down" },
+//     ],
+//     stack: ["Next.js", "SSR", "MQTT", "TimescaleDB", "D3.js", "Tailwind CSS"],
+//     links: { caseStudy: "#", live: "#" },
+//   },
+//   {
+//     no: "03",
+//     year: "2024",
+//     title: "Halo Network",
+//     subtitle: "Multi-tenant Affiliate Platform",
+//     kicker: "Multi-tenant · Platform",
+//     blurb:
+//       "Affiliate & influencer platform with automated campaign workflows and a reward engine processing 1,000+ daily transactions with full audit trail.",
+//     metrics: [
+//       { v: "1K+",  l: "TX / Day",   icon: "chart"  },
+//       { v: "100%", l: "Audited",    icon: "code"   },
+//       { v: "3×",   l: "Revenue",    icon: "trend-down" },
+//       { v: "50ms", l: "Response",   icon: "bolt"   },
+//     ],
+//     stack: ["TypeScript", "tRPC", "Prisma", "Redis"],
+//     links: { caseStudy: "#", live: "#" },
+//   },
+//   {
+//     no: "04",
+//     year: "2023",
+//     title: "Maple",
+//     subtitle: "Team Productivity Analytics",
+//     kicker: "Analytics · SaaS",
+//     blurb:
+//       "End-to-end engineering team performance platform with AI sprint forecasting and cycle-time analytics. Reduced planning overhead by 40% across 12 organizations.",
+//     metrics: [
+//       { v: "50+",  l: "Teams",      icon: "users"  },
+//       { v: "40%",  l: "Time Saved", icon: "clock"  },
+//       { v: "98%",  l: "Retention",  icon: "chart"  },
+//       { v: "12ms", l: "P99 Query",  icon: "bolt"   },
+//     ],
+//     stack: ["React", "Golang", "ClickHouse", "Temporal", "Tailwind CSS"],
+//     links: { caseStudy: "#", live: "#" },
+//   },
+// ];
+
 export const projects: Project[] = [
   {
     no: "01",
     year: "2025",
-    title: "Vox Commerce",
-    subtitle: "AI-Powered Headless Storefront",
-    kicker: "AI · Commerce",
+    title: "IQLIQ Brand Portal",
+    subtitle: "Brand Campaign & Loyalty Management",
+    kicker: "SaaS · Marketing",
     featured: true,
     blurb:
-      "A scalable storefront with a voice assistant for conversational product discovery. Integrated AI recommendations that increased engagement and conversions significantly.",
+      "A platform that enables brands to create, manage, and monitor loyalty campaigns across multiple malls. Built dynamic dashboards, campaign management workflows, analytics, and role-based access for enterprise clients.",
     metrics: [
-      { v: "+45%", l: "Engagement",        icon: "chart" },
-      { v: "1.2s",  l: "TTI",              icon: "clock" },
-      { v: "92%",   l: "User Satisfaction", icon: "users" },
-      { v: "100%",  l: "Responsive",        icon: "code"  },
+      { v: "50+", l: "Brands", icon: "users" },
+      { v: "100+", l: "Campaigns", icon: "chart" },
+      { v: "99.9%", l: "Uptime", icon: "signal" },
+      { v: "100%", l: "Responsive", icon: "code" },
     ],
-    stack: ["Next.js", "OpenAI", "Stripe", "PostgreSQL", "Tailwind CSS"],
-    links: { caseStudy: "#", live: "#" },
+    stack: [
+      "React",
+      "TypeScript",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "REST API",
+    ],
+    links: {
+      caseStudy: "https://brand.iqliq.ae",
+      live: "https://brand.iqliq.ae",
+    },
   },
+
   {
     no: "02",
-    year: "2024",
-    title: "Sentinel Grid",
-    subtitle: "Real-time IoT Monitoring Dashboard",
-    kicker: "IoT · Real-time",
+    year: "2025",
+    title: "Mall Management Dashboard",
+    subtitle: "Mall Operations & Store Analytics",
+    kicker: "Dashboard · Analytics",
     blurb:
-      "Real-time SSR dashboard for smart waste sensors across the city. Tuned rendering for high-frequency feeds — sub-200ms updates at the edge.",
+      "Enterprise dashboard for mall administrators to onboard stores, launch campaigns, monitor customer engagement, manage invoices, and analyze loyalty program performance in real time.",
     metrics: [
-      { v: "<200ms", l: "Latency",       icon: "bolt"       },
-      { v: "10K+",   l: "Sessions",      icon: "db"         },
-      { v: "99.9%",  l: "Uptime",        icon: "signal"     },
-      { v: "-30%",   l: "Cost Optimized", icon: "trend-down" },
+      { v: "500+", l: "Stores", icon: "db" },
+      { v: "10K+", l: "Customers", icon: "users" },
+      { v: "Real-time", l: "Analytics", icon: "chart" },
+      { v: "<300ms", l: "Response", icon: "bolt" },
     ],
-    stack: ["Next.js", "SSR", "MQTT", "TimescaleDB", "D3.js", "Tailwind CSS"],
-    links: { caseStudy: "#", live: "#" },
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "React Query",
+      "Chart.js",
+    ],
+    links: {
+      caseStudy: "https://mall.iqliqlive.ae",
+      live: "https://mall.iqliqlive.ae",
+    },
   },
+
   {
     no: "03",
-    year: "2024",
-    title: "Halo Network",
-    subtitle: "Multi-tenant Affiliate Platform",
-    kicker: "Multi-tenant · Platform",
+    year: "2025",
+    title: "Admin Control Center",
+    subtitle: "Multi-tenant Platform Administration",
+    kicker: "Admin · Enterprise",
     blurb:
-      "Affiliate & influencer platform with automated campaign workflows and a reward engine processing 1,000+ daily transactions with full audit trail.",
+      "Centralized admin portal used to manage brands, malls, users, permissions, loyalty configurations, and system-wide settings. Designed reusable components and optimized complex data tables for large datasets.",
     metrics: [
-      { v: "1K+",  l: "TX / Day",   icon: "chart"  },
-      { v: "100%", l: "Audited",    icon: "code"   },
-      { v: "3×",   l: "Revenue",    icon: "trend-down" },
-      { v: "50ms", l: "Response",   icon: "bolt"   },
+      { v: "20+", l: "Modules", icon: "code" },
+      { v: "RBAC", l: "Security", icon: "signal" },
+      { v: "95+", l: "Lighthouse", icon: "chart" },
+      { v: "<250ms", l: "Load Time", icon: "clock" },
     ],
-    stack: ["TypeScript", "tRPC", "Prisma", "Redis"],
-    links: { caseStudy: "#", live: "#" },
+    stack: [
+      "React",
+      "TypeScript",
+      "Redux",
+      "Tailwind CSS",
+      "REST API",
+    ],
+    links: {
+      caseStudy: "https://admin.iqliqlive.ae",
+      live: "https://admin.iqliqlive.ae",
+    },
   },
+
   {
     no: "04",
-    year: "2023",
-    title: "Maple",
-    subtitle: "Team Productivity Analytics",
-    kicker: "Analytics · SaaS",
+    year: "2025",
+    title: "IQLIQ Consumer App",
+    subtitle: "Digital Loyalty & Rewards Platform",
+    kicker: "Loyalty · Customer Experience",
     blurb:
-      "End-to-end engineering team performance platform with AI sprint forecasting and cycle-time analytics. Reduced planning overhead by 40% across 12 organizations.",
+      "Customer-facing web application where users discover campaigns, upload invoices, earn Qoyns, redeem rewards, and track transaction history through a modern responsive interface.",
     metrics: [
-      { v: "50+",  l: "Teams",      icon: "users"  },
-      { v: "40%",  l: "Time Saved", icon: "clock"  },
-      { v: "98%",  l: "Retention",  icon: "chart"  },
-      { v: "12ms", l: "P99 Query",  icon: "bolt"   },
+      { v: "25K+", l: "Users", icon: "users" },
+      { v: "1K+", l: "Rewards Claimed", icon: "chart" },
+      { v: "100%", l: "Mobile Ready", icon: "code" },
+      { v: "4.8★", l: "User Rating", icon: "trend-down" },
     ],
-    stack: ["React", "Golang", "ClickHouse", "Temporal", "Tailwind CSS"],
-    links: { caseStudy: "#", live: "#" },
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "React Query",
+      "Firebase",
+    ],
+    links: {
+      caseStudy: "https://app.iqliqlive.ae",
+      live: "https://app.iqliqlive.ae",
+    },
+  },
+
+  {
+    no: "05",
+    year: "2024",
+    title: "Agency Management Portal",
+    subtitle: "Campaign & Partner Operations",
+    kicker: "Agency · Workflow",
+    blurb:
+      "Agency portal for managing client campaigns, approvals, creative assets, reporting, and collaboration with brands. Built reusable UI architecture and optimized workflow efficiency.",
+    metrics: [
+      { v: "100+", l: "Campaigns", icon: "chart" },
+      { v: "20+", l: "Agencies", icon: "users" },
+      { v: "40%", l: "Faster Workflow", icon: "clock" },
+      { v: "99.9%", l: "Availability", icon: "signal" },
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Redux Toolkit",
+      "REST API",
+    ],
+    links: {
+      caseStudy: "https://agency.iqliqlive.ae",
+      live: "https://agency.iqliqlive.ae",
+    },
+  },
+
+  {
+    no: "06",
+    year: "2024",
+    title: "Delivery Management System",
+    subtitle: "Last-mile Delivery Operations",
+    kicker: "Logistics · Operations",
+    blurb:
+      "Delivery management platform for assigning orders, tracking delivery status, managing drivers, and monitoring operational performance through real-time dashboards.",
+    metrics: [
+      { v: "5K+", l: "Deliveries", icon: "chart" },
+      { v: "<2s", l: "Status Sync", icon: "bolt" },
+      { v: "99.5%", l: "Reliability", icon: "signal" },
+      { v: "100%", l: "Responsive", icon: "code" },
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Google Maps API",
+      "REST API",
+    ],
+    links: {
+      caseStudy: "https://delivery.iqliq.ae",
+      live: "https://delivery.iqliq.ae",
+    },
   },
 ];
 
