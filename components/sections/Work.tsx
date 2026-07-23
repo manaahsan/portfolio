@@ -107,10 +107,10 @@ const URLS = [
   "https://cred-garage.vercel.app/dashboard",
 
   // 05 - Featured
-  "https://pocket-pal-finance-8m96.vercel.app/auth",
+  "https://pocket-pal-finance-8m96.vercel.app/",
 
   // 06 - Featured
-  "https://task-management-sand-nine.vercel.app/kanban-board",
+  "https://task-management-sand-nine.vercel.app/",
 
   // 07
   "https://mern-stack-jet.vercel.app/",
@@ -128,7 +128,7 @@ const URLS = [
   "https://agency.iqliqlive.ae/login",
 
   // 12
-  "https://delivery.iqliq.ae/login",
+  "https://delivery.iqliq.ae/",
 
   // 13
   "https://qliq-ashy.vercel.app/",
