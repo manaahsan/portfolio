@@ -108,6 +108,7 @@ export const projects: Project[] = [
     title: "Mall Management Dashboard",
     subtitle: "Mall Operations & Store Analytics",
     kicker: "Dashboard · Analytics",
+    featured: true,
     blurb:
       "Enterprise dashboard for mall administrators to onboard stores, launch campaigns, monitor customer engagement, manage invoices, and analyze loyalty program performance in real time.",
     metrics: [
@@ -135,6 +136,7 @@ export const projects: Project[] = [
     title: "Admin Control Center",
     subtitle: "Multi-tenant Platform Administration",
     kicker: "Admin · Enterprise",
+    featured: true,
     blurb:
       "Centralized admin portal used to manage brands, malls, users, permissions, loyalty configurations, and system-wide settings. Designed reusable components and optimized complex data tables for large datasets.",
     metrics: [
@@ -158,17 +160,188 @@ export const projects: Project[] = [
 
   {
     no: "04",
+    year: "2024",
+    title: "Cred Garage",
+    subtitle: "Financial Services Dashboard",
+    kicker: "FinTech · Dashboard",
+    featured: true,
+    blurb:
+      "Enterprise financial dashboard built to visualize business insights, manage operations, and provide data-driven decision making through interactive analytics and reusable components.",
+    metrics: [
+      { v: "20+", l: "Widgets", icon: "chart" },
+      { v: "95+", l: "Performance", icon: "signal" },
+      { v: "100%", l: "Responsive", icon: "code" },
+      { v: "<300ms", l: "Navigation", icon: "bolt" },
+    ],
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "React Query",
+      "Chart.js",
+    ],
+    links: {
+      caseStudy: "https://cred-garage.vercel.app/dashboard",
+      live: "https://cred-garage.vercel.app/dashboard",
+    },
+  },
+
+  {
+    no: "05",
+    year: "2025",
+    title: "PocketPal Finance",
+    subtitle: "Personal Finance Management",
+    kicker: "FinTech · Personal Finance",
+    featured: true,
+    blurb:
+      "Personal finance application that helps users manage expenses, track budgets, visualize financial insights, and securely manage their financial activities.",
+    metrics: [
+      { v: "JWT", l: "Authentication", icon: "signal" },
+      { v: "Charts", l: "Analytics", icon: "chart" },
+      { v: "100%", l: "Responsive", icon: "code" },
+      { v: "<2s", l: "Load Time", icon: "bolt" },
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Firebase",
+      "Chart.js",
+    ],
+    links: {
+      caseStudy: "https://pocket-pal-finance-8m96.vercel.app/auth",
+      live: "https://pocket-pal-finance-8m96.vercel.app/auth",
+    },
+  },
+
+  {
+    no: "06",
+    year: "2024",
+    title: "Task Management System",
+    subtitle: "Kanban Productivity Platform",
+    kicker: "Productivity · Collaboration",
+    featured: true,
+    blurb:
+      "A Trello-inspired task management platform with Kanban boards, drag-and-drop interactions, task organization, and a responsive productivity-focused interface.",
+    metrics: [
+      { v: "Kanban", l: "Workflow", icon: "chart" },
+      { v: "Drag & Drop", l: "UX", icon: "bolt" },
+      { v: "100%", l: "Responsive", icon: "code" },
+      { v: "Fast", l: "Performance", icon: "signal" },
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "DnD Kit",
+      "REST API",
+    ],
+    links: {
+      caseStudy:
+        "https://task-management-sand-nine.vercel.app/kanban-board",
+      live:
+        "https://task-management-sand-nine.vercel.app/kanban-board",
+    },
+  },
+
+  {
+    no: "07",
+    year: "2024",
+    title: "MERN Commerce",
+    subtitle: "Full Stack E-Commerce Platform",
+    kicker: "E-Commerce · MERN",
+    featured: false,
+    blurb:
+      "A complete MERN stack e-commerce platform with product management, authentication, shopping cart, and REST API integration.",
+    metrics: [
+      { v: "MERN", l: "Stack", icon: "db" },
+      { v: "JWT", l: "Auth", icon: "signal" },
+      { v: "100%", l: "Responsive", icon: "code" },
+      { v: "REST", l: "API", icon: "chart" },
+    ],
+    stack: [
+      "MongoDB",
+      "Express",
+      "React",
+      "Node.js",
+      "Tailwind CSS",
+    ],
+    links: {
+      caseStudy: "https://mern-stack-jet.vercel.app/",
+      live: "https://mern-stack-jet.vercel.app/",
+    },
+  },
+
+  {
+    no: "08",
+    year: "2024",
+    title: "SaaS Analytics Platform",
+    subtitle: "Business Management Dashboard",
+    kicker: "SaaS · Dashboard",
+    featured: false,
+    blurb:
+      "Modern SaaS dashboard with reusable components, analytics views, responsive layouts, and scalable frontend architecture.",
+    metrics: [
+      { v: "20+", l: "Components", icon: "code" },
+      { v: "95+", l: "Performance", icon: "chart" },
+      { v: "100%", l: "Responsive", icon: "signal" },
+      { v: "Fast", l: "UX", icon: "bolt" },
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "React Query",
+      "Chart.js",
+    ],
+    links: {
+      caseStudy: "https://saas-project-01.vercel.app/",
+      live: "https://saas-project-01.vercel.app/",
+    },
+  },
+
+  {
+    no: "09",
+    year: "2024",
+    title: "Maple",
+    subtitle: "Modern Digital Experience Platform",
+    kicker: "Web App · UI/UX",
+    featured: false,
+    blurb:
+      "Modern responsive web application focused on clean user experience, reusable components, and optimized frontend performance.",
+    metrics: [
+      { v: "95+", l: "Lighthouse", icon: "chart" },
+      { v: "100%", l: "Responsive", icon: "code" },
+      { v: "<2s", l: "Load Time", icon: "bolt" },
+      { v: "Modern", l: "Design", icon: "trend-down" },
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vite",
+      "Framer Motion",
+    ],
+    links: {
+      caseStudy: "https://maple-app-pied.vercel.app/",
+      live: "https://maple-app-pied.vercel.app/",
+    },
+  },
+
+  {
+    no: "10",
     year: "2025",
     title: "IQLIQ Consumer App",
     subtitle: "Digital Loyalty & Rewards Platform",
     kicker: "Loyalty · Customer Experience",
+    featured: false,
     blurb:
-      "Customer-facing web application where users discover campaigns, upload invoices, earn Qoyns, redeem rewards, and track transaction history through a modern responsive interface.",
+      "Customer-facing loyalty application where users discover campaigns, upload invoices, earn rewards, and track transactions.",
     metrics: [
       { v: "25K+", l: "Users", icon: "users" },
-      { v: "1K+", l: "Rewards Claimed", icon: "chart" },
+      { v: "1K+", l: "Rewards", icon: "chart" },
       { v: "100%", l: "Mobile Ready", icon: "code" },
-      { v: "4.8★", l: "User Rating", icon: "trend-down" },
+      { v: "Fast", l: "Experience", icon: "bolt" },
     ],
     stack: [
       "React",
@@ -184,17 +357,18 @@ export const projects: Project[] = [
   },
 
   {
-    no: "05",
+    no: "11",
     year: "2024",
     title: "Agency Management Portal",
     subtitle: "Campaign & Partner Operations",
     kicker: "Agency · Workflow",
+    featured: false,
     blurb:
-      "Agency portal for managing client campaigns, approvals, creative assets, reporting, and collaboration with brands. Built reusable UI architecture and optimized workflow efficiency.",
+      "Portal for managing campaigns, approvals, creative assets, reporting, and collaboration between agencies and brands.",
     metrics: [
       { v: "100+", l: "Campaigns", icon: "chart" },
       { v: "20+", l: "Agencies", icon: "users" },
-      { v: "40%", l: "Faster Workflow", icon: "clock" },
+      { v: "40%", l: "Efficiency", icon: "bolt" },
       { v: "99.9%", l: "Availability", icon: "signal" },
     ],
     stack: [
@@ -211,16 +385,17 @@ export const projects: Project[] = [
   },
 
   {
-    no: "06",
+    no: "12",
     year: "2024",
     title: "Delivery Management System",
     subtitle: "Last-mile Delivery Operations",
     kicker: "Logistics · Operations",
+    featured: false,
     blurb:
-      "Delivery management platform for assigning orders, tracking delivery status, managing drivers, and monitoring operational performance through real-time dashboards.",
+      "Delivery operations dashboard for tracking orders, drivers, delivery status, and logistics performance.",
     metrics: [
       { v: "5K+", l: "Deliveries", icon: "chart" },
-      { v: "<2s", l: "Status Sync", icon: "bolt" },
+      { v: "<2s", l: "Sync Time", icon: "bolt" },
       { v: "99.5%", l: "Reliability", icon: "signal" },
       { v: "100%", l: "Responsive", icon: "code" },
     ],
@@ -236,10 +411,39 @@ export const projects: Project[] = [
       live: "https://delivery.iqliq.ae",
     },
   },
+
+  {
+    no: "13",
+    year: "2024",
+    title: "QLIQ Landing Experience",
+    subtitle: "Marketing Website & Product Showcase",
+    kicker: "Branding · UI/UX",
+    featured: false,
+    blurb:
+      "High-performance marketing website with modern animations, responsive layouts, and conversion-focused design.",
+    metrics: [
+      { v: "95+", l: "Lighthouse", icon: "chart" },
+      { v: "SEO", l: "Optimized", icon: "signal" },
+      { v: "100%", l: "Responsive", icon: "code" },
+      { v: "<2s", l: "Load Time", icon: "bolt" },
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Vite",
+    ],
+    links: {
+      caseStudy: "https://qliq-ashy.vercel.app/",
+      live: "https://qliq-ashy.vercel.app/",
+    },
+  },
 ];
 
 export interface Tech {
   name: string;
+  desc: string;
   logo: ReactNode;
 }
 
@@ -304,6 +508,7 @@ export const stackData: Record<StackCat, Tech[]> = {
   frontend: [
     {
       name: "Next.js",
+      desc: "The React framework for production.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <circle cx="20" cy="20" r="20" fill="#000" />
@@ -314,6 +519,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "React",
+      desc: "A JavaScript library for building UI.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#61DAFB" strokeWidth="1.8" />
@@ -325,6 +531,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "TypeScript",
+      desc: "Typed JavaScript for better DX.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#3178C6" />
@@ -334,6 +541,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Tailwind CSS",
+      desc: "Utility-first CSS framework for rapid UI.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <path fill="#06B6D4" d="M20 7c-4.8 0-7.8 2.4-9 7.2 1.8-2.4 3.9-3.3 6.3-2.7 1.37.34 2.35 1.34 3.44 2.44C22.67 15.84 25.1 18.2 30 18.2c4.8 0 7.8-2.4 9-7.2-1.8 2.4-3.9 3.3-6.3 2.7-1.37-.34-2.35-1.34-3.44-2.44C27.33 9.36 24.9 7 20 7z" />
@@ -343,6 +551,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "TanStack Query",
+      desc: "Powerful data fetching for React.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <circle cx="20" cy="20" r="18" fill="#FF4154" />
@@ -356,6 +565,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Zustand",
+      desc: "Small, fast and scalable state management.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="6" fill="#7B5230" />
@@ -371,6 +581,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "shadcn/ui",
+      desc: "Beautifully designed components built for you.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#18181B" />
@@ -383,6 +594,7 @@ export const stackData: Record<StackCat, Tech[]> = {
   backend: [
     {
       name: "Node.js",
+      desc: "JavaScript runtime for server-side apps.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <path fill="#339933" d="M20 3L5 12v16l15 9 15-9V12L20 3z" />
@@ -392,6 +604,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Express",
+      desc: "Fast, minimalist web framework for Node.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#1C1C1C" />
@@ -401,6 +614,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "tRPC",
+      desc: "End-to-end typesafe APIs made easy.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#2596BE" />
@@ -410,6 +624,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Python",
+      desc: "Versatile language for AI & web backends.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <path fill="#3776AB" d="M20 4c-5.5 0-9 2-9 4.5v3H20v1.5H8.5C6 13 4 15.5 4 20s2 7 4.5 7H11v-4.5C11 20 13.5 18 20 18h9c2.5 0 4-2 4-4.5V8.5C33 6 29.5 4 20 4zM16 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" />
@@ -419,6 +634,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "FastAPI",
+      desc: "High-performance Python web framework.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <circle cx="20" cy="20" r="18" fill="#009688" />
@@ -428,6 +644,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "GraphQL",
+      desc: "Query language for your API.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <polygon points="20,5 34,13.5 34,26.5 20,35 6,26.5 6,13.5" stroke="#E10098" strokeWidth="2" fill="none" />
@@ -445,6 +662,7 @@ export const stackData: Record<StackCat, Tech[]> = {
   database: [
     {
       name: "PostgreSQL",
+      desc: "Powerful open-source relational database.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <ellipse cx="20" cy="12" rx="12" ry="5" fill="#4A90D9" />
@@ -457,6 +675,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Redis",
+      desc: "In-memory data structure store & cache.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#DC382D" />
@@ -468,6 +687,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "MongoDB",
+      desc: "Flexible document-oriented database.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <path fill="#00ED64" d="M20 3c0 0-8 10.5-8 18 0 4.42 3.58 8 8 8s8-3.58 8-8c0-7.5-8-18-8-18z" />
@@ -478,6 +698,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Prisma",
+      desc: "Next-generation ORM for Node.js.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <path fill="#0C344B" d="M8 32L20 5l12 27-12 3L8 32z" />
@@ -487,6 +708,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "MySQL",
+      desc: "Reliable open-source relational database.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#00758F" />
@@ -498,6 +720,7 @@ export const stackData: Record<StackCat, Tech[]> = {
   tools: [
     {
       name: "AWS",
+      desc: "Cloud computing platform & infrastructure.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#232F3E" />
@@ -508,6 +731,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Docker",
+      desc: "Containerize apps for consistent deploys.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#2496ED" />
@@ -524,6 +748,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Vercel",
+      desc: "Deploy frontend apps with zero config.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#000" />
@@ -533,6 +758,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Git",
+      desc: "Distributed version control system.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <circle cx="20" cy="20" r="18" fill="#F05032" />
@@ -545,6 +771,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "GitHub",
+      desc: "Code hosting & collaboration platform.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <circle cx="20" cy="20" r="18" fill="#181717" />
@@ -554,6 +781,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Nginx",
+      desc: "High-performance web server & proxy.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#009900" />
@@ -565,6 +793,7 @@ export const stackData: Record<StackCat, Tech[]> = {
   others: [
     {
       name: "OpenAI",
+      desc: "AI models & APIs for smart features.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <circle cx="20" cy="20" r="18" fill="#000" />
@@ -575,6 +804,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Stripe",
+      desc: "Payment infrastructure for the internet.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#635BFF" />
@@ -584,6 +814,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Supabase",
+      desc: "Open-source Firebase alternative.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#1C1C1C" />
@@ -593,6 +824,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Figma",
+      desc: "Collaborative UI design & prototyping.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect x="13" y="4" width="14" height="10" rx="5" fill="#F24E1E" />
@@ -605,6 +837,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Postman",
+      desc: "API testing & development platform.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <circle cx="20" cy="20" r="18" fill="#FF6C37" />
@@ -616,6 +849,7 @@ export const stackData: Record<StackCat, Tech[]> = {
     },
     {
       name: "Cloudflare",
+      desc: "CDN, DNS & edge security services.",
       logo: (
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="5" fill="#F48120" />
